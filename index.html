@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Карты семьи | GTA V RP</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #1a1a1d;
+        color: #e0e0e0;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        padding: 2rem 1rem;
+        text-align: center;
+        border-bottom: 2px solid #ff4d4d;
+      }
+      h1 { margin: 0; font-size: 2.5rem; }
+      .subtitle { color: #a0a0a0; margin-top: 0.5rem; }
+      main {
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+      .card {
+        background: #2b2b30;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        text-align: center;
+      }
+      .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-bottom: 1rem;
+        background: #333;
+      }
+      .card h3 { color: #ff4d4d; margin-top: 0; }
+      .btn-download {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.7rem 1.5rem;
+        background: #ff4d4d;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+      .btn-download:hover { background: #cc0000; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Карты семьи Murokami</h1>
+      <p class="subtitle">Лучшие карты для GTA V RP — только проверенные и готовые к установке</p>
+    </header>
+    <main>
+      <section class="cards-grid">
+        <!-- Карточка 1 -->
+        <article class="card">
+          <img src="assets/map-port-preview.jpg" alt="Порт — превью карты" onerror="this.style.display='none'">
+          <h3>Карта «Порт»</h3>
+          <p>Большая территория с доками, складами и подъездными путями. Идеально для рейдов и контрабанды.</p>
+          <a href="assets/port-map.zip" class="btn-download" download>Скачать (ZIP, ~250 MB)</a>
+        </article>
+
+        <!-- Карточка 2 -->
+        <article class="card">
+          <img src="assets/map-city-preview.jpg" alt="Центр города — превью" onerror="this.style.display='none'">
+          <h3>Карта «Центр города»</h3>
+          <p>Плотная городская застройка, узкие улицы, много точек интереса. Отлично для уличных перестрелок и погонь.</p>
+          <a href="assets/city-map.zip" class="btn-download" download>Скачать (ZIP, ~310 MB)</a>
+        </article>
+
+        <!-- Сюда можно добавлять новые карточки -->
+      </section>
+    </main>
+  </body>
+</html>
