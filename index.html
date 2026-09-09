@@ -18,70 +18,146 @@
       }
       h1 { margin: 0; font-size: 2.5rem; }
       .subtitle { color: #a0a0a0; margin-top: 0.5rem; }
-      main {
-        max-width: 1000px;
-        margin: 2rem auto;
-        padding: 0 1rem;
+
+      /* Вкладки */
+      .tabs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding: 1rem;
       }
-      .cards-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 2rem;
+      .tab-btn {
+        background: transparent;
+        border: 1px solid #444;
+        color: #aaa;
+        padding: 8px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: all 0.2s;
       }
-      .card {
-        background: #2b2b30;
-        padding: 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        text-align: center;
-      }
-      .card img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-        border-radius: 6px;
-        margin-bottom: 1rem;
-        background: #333;
-      }
-      .card h3 { color: #ff4d4d; margin-top: 0; }
-      .btn-download {
-        display: inline-block;
-        margin-top: 1rem;
-        padding: 0.7rem 1.5rem;
+      .tab-btn.active {
         background: #ff4d4d;
         color: white;
-        text-decoration: none;
-        border-radius: 5px;
+        border-color: #ff4d4d;
+      }
+      .tab-btn:hover {
+        border-color: #ff4d4d;
+        color: #ff4d4d;
+      }
+      .tab-btn.active:hover {
+        color: white;
+      }
+
+      /* Контент */
+      .tab-content {
+        display: none;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem 2rem;
+      }
+      .tab-content.active { display: block; }
+
+      /* Галерея */
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+      .gallery figure {
+        background: #2b2b30;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        margin: 0;
+        text-align: center;
+      }
+      .gallery img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 6px;
+        background: #333;
+      }
+      .gallery figcaption {
+        margin-top: 0.8rem;
+        color: #ff4d4d;
+        font-size: 0.95rem;
         font-weight: bold;
       }
-      .btn-download:hover { background: #cc0000; }
+
+      /* Вторая вкладка (пустая) */
+      .placeholder {
+        text-align: center;
+        padding: 4rem 1rem;
+        color: #666;
+        font-size: 1.2rem;
+      }
     </style>
   </head>
   <body>
     <header>
-      <h1>Карты семьи Murokami</h1>
-      <p class="subtitle">Лучшие карты для GTA V RP — только проверенные и готовые к установке</p>
+      <h1>Карты семьи [Название]</h1>
+      <p class="subtitle">Фотографии карт и локаций</p>
     </header>
-    <main>
-      <section class="cards-grid">
-        <!-- Карточка 1 -->
-        <article class="card">
-          <img src="assets/map-port-preview.jpg" alt="Порт — превью карты" onerror="this.style.display='none'">
-          <h3>Карта «Порт»</h3>
-          <p>Большая территория с доками, складами и подъездными путями. Идеально для рейдов и контрабанды.</p>
-          <a href="assets/port-map.zip" class="btn-download" download>Скачать (ZIP, ~250 MB)</a>
-        </article>
 
-        <!-- Карточка 2 -->
-        <article class="card">
-          <img src="assets/map-city-preview.jpg" alt="Центр города — превью" onerror="this.style.display='none'">
-          <h3>Карта «Центр города»</h3>
-          <p>Плотная городская застройка, узкие улицы, много точек интереса. Отлично для уличных перестрелок и погонь.</p>
-          <a href="assets/city-map.zip" class="btn-download" download>Скачать (ZIP, ~310 MB)</a>
-        </article>
+    <!-- Кнопки вкладок -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="openTab('photos', this)">Фотографии</button>
+      <button class="tab-btn" onclick="openTab('second', this)">Вкладка 2</button>
+    </div>
 
-        <!-- Сюда можно добавлять новые карточки -->
-      </section>
-    </main>
+    <!-- Вкладка 1: Фотографии -->
+    <div id="photos" class="tab-content active">
+      <div class="gallery">
+        <!-- Фото 1 -->
+        <figure>
+          <img src="assets/photo1.jpg" alt="Фото 1" onerror="this.style.display='none'; this.parentElement.style.display='none'">
+          <figcaption>Фото 1</figcaption>
+        </figure>
+        <!-- Фото 2 -->
+        <figure>
+          <img src="assets/photo2.jpg" alt="Фото 2" onerror="this.style.display='none'; this.parentElement.style.display='none'">
+          <figcaption>Фото 2</figcaption>
+        </figure>
+        <!-- Фото 3 -->
+        <figure>
+          <img src="assets/photo3.jpg" alt="Фото 3" onerror="this.style.display='none'; this.parentElement.style.display='none'">
+          <figcaption>Фото 3</figcaption>
+        </figure>
+        <!-- Фото 4 -->
+        <figure>
+          <img src="assets/photo4.jpg" alt="Фото 4" onerror="this.style.display='none'; this.parentElement.style.display='none'">
+          <figcaption>Фото 4</figcaption>
+        </figure>
+        <!-- Фото 5 -->
+        <figure>
+          <img src="assets/photo5.jpg" alt="Фото 5" onerror="this.style.display='none'; this.parentElement.style.display='none'">
+          <figcaption>Фото 5</figcaption>
+        </figure>
+        <!-- Фото 6 -->
+        <figure>
+          <img src="assets/photo6.jpg" alt="Фото 6" onerror="this.style.display='none'; this.parentElement.style.display='none'">
+          <figcaption>Фото 6</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- Вкладка 2: пока пусто -->
+    <div id="second" class="tab-content">
+      <div class="placeholder">
+        Скоро тут что-то появится 🙂
+      </div>
+    </div>
+
+    <!-- Скрипт -->
+    <script>
+      function openTab(tabName, btn) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+        btn.classList.add('active');
+      }
+    </script>
   </body>
 </html>
