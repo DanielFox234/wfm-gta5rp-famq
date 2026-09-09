@@ -2,22 +2,30 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <title>Карты семьи | GTA V RP</title>
+    <title>Галерея карт | GTA V RP</title>
     <style>
+      :root {
+        --bg: #121214;
+        --card-bg: #1e1e21;
+        --accent: #ff4d4d;
+        --text: #e0e0e0;
+        --border: #333;
+      }
       body {
-        font-family: Arial, sans-serif;
-        background-color: #1a1a1d;
-        color: #e0e0e0;
         margin: 0;
         padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
       }
+
       header {
         padding: 2rem 1rem;
         text-align: center;
-        border-bottom: 2px solid #ff4d4d;
+        border-bottom: 2px solid var(--accent);
       }
-      h1 { margin: 0; font-size: 2.5rem; }
-      .subtitle { color: #a0a0a0; margin-top: 0.5rem; }
+      h1 { margin: 0; font-size: 2.2rem; }
+      .subtitle { color: #888; margin-top: 0.5rem; }
 
       /* Вкладки */
       .tabs {
@@ -30,133 +38,161 @@
         background: transparent;
         border: 1px solid #444;
         color: #aaa;
-        padding: 8px 20px;
+        padding: 8px 16px;
         cursor: pointer;
         border-radius: 4px;
-        font-size: 1rem;
         transition: all 0.2s;
       }
       .tab-btn.active {
-        background: #ff4d4d;
+        background: var(--accent);
         color: white;
-        border-color: #ff4d4d;
+        border-color: var(--accent);
       }
-      .tab-btn:hover {
-        border-color: #ff4d4d;
-        color: #ff4d4d;
-      }
-      .tab-btn.active:hover {
-        color: white;
-      }
+      .tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+      .tab-btn.active:hover { color: white; }
 
-      /* Контент */
-      .tab-content {
-        display: none;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem 2rem;
-      }
+      /* Контент вкладок */
+      .tab-content { display: none; max-width: 1200px; margin: 0 auto; padding: 0 1rem 2rem; }
       .tab-content.active { display: block; }
 
       /* Галерея */
       .gallery {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.2rem;
       }
-      .gallery figure {
-        background: #2b2b30;
+      .card {
+        background: var(--card-bg);
         padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        margin: 0;
-        text-align: center;
-      }
-      .gallery img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
         border-radius: 6px;
-        background: #333;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid var(--border);
       }
-      .gallery figcaption {
-        margin-top: 0.8rem;
-        color: #ff4d4d;
-        font-size: 0.95rem;
-        font-weight: bold;
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        border-color: var(--accent);
       }
 
-      /* Вторая вкладка (пустая) */
+      .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 4px;
+        background: #222;
+      }
+      .card figcaption {
+        margin-top: 0.6rem;
+        color: var(--accent);
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+
+      /* Модальное окно */
+      #modal {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0, 0, 0, 0.85);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      #modal.open { display: flex; }
+      #modal-img {
+        max-width: 90vw;
+        max-height: 90vh;
+        border-radius: 6px;
+        border: 2px solid #444;
+        box-shadow: 0 0 24px rgba(0,0,0,0.6);
+        transition: transform 0.2s;
+      }
+      #modal-img:hover {
+        transform: scale(1.02);
+      }
+
+      /* Вторая вкладка (заглушка) */
       .placeholder {
         text-align: center;
-        padding: 4rem 1rem;
-        color: #666;
-        font-size: 1.2rem;
+        padding: 3rem 1rem;
+        color: #888;
       }
     </style>
   </head>
   <body>
     <header>
-      <h1>Карты взм для семьи Murokami</h1>
-      <p class="subtitle">Фотографии карт и локаций</p>
+      <h1>Галерея карт ВЗМ</h1>
+      <p class="subtitle">Фотографии локаций для семьи</p>
     </header>
 
-    <!-- Кнопки вкладок -->
+    <!-- Вкладки -->
     <div class="tabs">
-      <button class="tab-btn active" onclick="openTab('photos', this)">Фотографии</button>
-      <button class="tab-btn" onclick="openTab('second', this)">Вкладка 2</button>
+      <button class="tab-btn active" onclick="switchTab('photos', this)">Фотографии</button>
+      <button class="tab-btn" onclick="switchTab('second', this)">Вкладка 2</button>
     </div>
 
     <!-- Вкладка 1: Фотографии -->
     <div id="photos" class="tab-content active">
       <div class="gallery">
-        <!-- Фото 1 -->
-        <figure>
-          <img src="assets/photo1.png" alt="Фото 1" onerror="this.style.display='none'; this.parentElement.style.display='none'">
+        <!-- Карточка 1 -->
+        <div class="card" onclick="openModal('assets/photo1.jpg')">
+          <img src="assets/photo1.png" alt="Фото 1" onerror="this.parentElement.style.display='none'">
           <figcaption>Фото 1</figcaption>
-        </figure>
-        <!-- Фото 2 -->
-        <figure>
-          <img src="assets/photo2.png" alt="Фото 2" onerror="this.style.display='none'; this.parentElement.style.display='none'">
+        </div>
+
+        <!-- Карточка 2 -->
+        <div class="card" onclick="openModal('assets/photo2.jpg')">
+          <img src="assets/photo2.png" alt="Фото 2" onerror="this.parentElement.style.display='none'">
           <figcaption>Фото 2</figcaption>
-        </figure>
-        <!-- Фото 3 -->
-        <figure>
-          <img src="assets/photo3.png" alt="Фото 3" onerror="this.style.display='none'; this.parentElement.style.display='none'">
+        </div>
+
+        <!-- Карточка 3 -->
+        <div class="card" onclick="openModal('assets/photo3.jpg')">
+          <img src="assets/photo3.png" alt="Фото 3" onerror="this.parentElement.style.display='none'">
           <figcaption>Фото 3</figcaption>
-        </figure>
-        <!-- Фото 4 -->
-        <figure>
-          <img src="assets/photo4.png" alt="Фото 4" onerror="this.style.display='none'; this.parentElement.style.display='none'">
-          <figcaption>Фото 4</figcaption>
-        </figure>
-        <!-- Фото 5 -->
-        <figure>
-          <img src="assets/photo5.png" alt="Фото 5" onerror="this.style.display='none'; this.parentElement.style.display='none'">
-          <figcaption>Фото 5</figcaption>
-        </figure>
-        <!-- Фото 6 -->
-        <figure>
-          <img src="assets/photo6.png" alt="Фото 6" onerror="this.style.display='none'; this.parentElement.style.display='none'">
-          <figcaption>Фото 6</figcaption>
-        </figure>
+        </div>
+
+        <!-- Сюда можно добавлять новые карточки по аналогии -->
       </div>
     </div>
 
-    <!-- Вкладка 2: пока пусто -->
+    <!-- Вкладка 2: пока заглушка -->
     <div id="second" class="tab-content">
       <div class="placeholder">
-        Скоро тут что-то появится 🙂
+        Здесь будет что-то позже. Пока просто вкладка.
       </div>
     </div>
 
-    <!-- Скрипт -->
+    <!-- Окно просмотра большого фото -->
+    <div id="modal" onclick="closeModal()">
+      <img id="modal-img" src="" alt="Увеличенное фото">
+    </div>
+
     <script>
-      function openTab(tabName, btn) {
+      function switchTab(id, btn) {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-        document.getElementById(tabName).classList.add('active');
+        document.getElementById(id).classList.add('active');
         btn.classList.add('active');
+      }
+
+      function openModal(src) {
+        const modal = document.getElementById('modal');
+        const img = document.getElementById('modal-img');
+        img.src = src;
+        modal.classList.add('open');
+      }
+
+      function closeModal(e) {
+        if (e && e.target === document.getElementById('modal')) {
+          document.getElementById('modal').classList.remove('open');
+        } else if (!e) {
+          document.getElementById('modal').classList.remove('open');
+        }
       }
     </script>
   </body>
